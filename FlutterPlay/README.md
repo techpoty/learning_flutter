@@ -13,7 +13,6 @@ Make Music player part 2 https://youtu.be/T4yeX0uGpow
 How to make a toast in flutter without using any external plugin/library https://youtu.be/kV52PO2mkYQ
 
 
-<img src="images/Screenshot_20220330_105251.png" width="230"/>
-<img src="images/Screenshot_20220402_205522.png" width="230"/>
+<img src="images/Screenshot_20220330_105251.png" />
 <img src="images/Screenshot_20220403_195511.png" width="230"/>
 <img src="images/Screenshot_20220403_200501.png" width="230"/>
