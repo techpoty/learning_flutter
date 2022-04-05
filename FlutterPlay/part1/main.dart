@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 void main() {
@@ -37,22 +36,11 @@ class _MyHomePageState extends State<MyHomePage> {
   //define on audio plugin
   final OnAudioQuery _audioQuery = OnAudioQuery();
 
-  //today
-  //player
-  final AudioPlayer _player = AudioPlayer();
-
   //request permission from initStateMethod
   @override
   void initState() {
     super.initState();
     requestStoragePermission();
-  }
-
-  //dispose the player when done
-  @override
-  void dispose() {
-    _player.dispose();
-    super.dispose();
   }
 
   @override
@@ -124,12 +112,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     type: ArtworkType.AUDIO,
 
                   ),
-                  onTap: () async {
-                      toast(context, "Playing:  " + item.data![index].title);
-                      // Try to load audio from a source and catch any errors.
-                        String? uri = item.data![index].uri;
-                        await _player.setAudioSource(AudioSource.uri(Uri.parse(uri!)));
-                        await _player.play();
+                  onTap: ()  {
+                    //toast message showing he selected song title
+                      toast(context, "You Selected:   " + item.data![index].title);
+                   
                   },
                 ),
               );
