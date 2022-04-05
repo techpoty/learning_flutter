@@ -1,7 +1,7 @@
 # learning_flutter
 Flutter page source code
 
- Creating Music Player App Part 2,  Playing the songs and showing the control buttons, the playing song title, artwork,  seek bar , shuffle, repeat mode, skip to next & previous, play/pause buttons, etc
+ Creating Music Player App , showing all songs of the device in listiview,   Playing the songs and showing the control buttons, the playing song title, artwork,  seek bar , shuffle, repeat mode, skip to next & previous, play/pause buttons, etc
 
 
 These might be helpful
