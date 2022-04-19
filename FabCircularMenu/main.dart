@@ -1,0 +1,139 @@
+import 'package:fab_circular_menu/fab_circular_menu.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
+void main() {
+  runApp(const MyApp());
+}
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(title: 'Floating Action Bar Menu'),
+    );
+  }
+}
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  final String title;
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+// bg color
+  Color bgColor = const Color(0XFF214283); //Colors.black;
+
+  @override
+  Widget build(BuildContext context) {
+
+    return WillPopScope(
+      onWillPop: () => _onBackButtonPressedShowExitDialog(context),
+      child:  Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title),
+          backgroundColor: bgColor,
+        ),
+        backgroundColor: bgColor,
+        body:  Center(
+          child:  GradientText(
+            'FAB: Circular Menu',
+            style: const TextStyle(
+                fontSize: 63.0,
+                fontWeight: FontWeight.bold
+
+            ),
+            colors: const [
+              Colors.white,
+              Colors.yellowAccent,
+              Colors.red,
+            ],
+            textAlign: TextAlign.center,
+          ),
+
+        ),
+        floatingActionButton: Builder(
+          builder: (BuildContext context){
+            return FabCircularMenu(
+              ringColor: Colors.yellowAccent,
+              children: <Widget>[
+                IconButton(
+                  icon:  const Icon(Icons.home),
+                  color: Colors.black,
+                  onPressed: (){
+                    print("Home Item Pressed");
+                  },
+                ),
+                IconButton(
+                  icon:  const Icon(Icons.person),
+                  color: Colors.black,
+                  onPressed: (){
+                    print("Person Item Pressed");
+                    },
+                ),
+                IconButton(
+                  icon:  const Icon(Icons.favorite),
+                  color: Colors.black,
+                  onPressed: (){ },
+                ),
+                IconButton(
+                  icon:  const Icon(Icons.movie),
+                  color: Colors.black,
+                  onPressed: (){ },
+                ),
+
+              ],
+            );
+          },
+        ),
+        // This trailing comma makes auto-formatting nicer for build methods.
+      ),
+    );
+  }
+
+  //define a toast method
+  void toast(BuildContext context, String text){
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(text, textAlign: TextAlign.center,),
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+    ));
+  }
+
+//close app confirm dialog
+  Future<bool> _onBackButtonPressedShowExitDialog(BuildContext context)  async{
+    bool? exitApp = await showDialog(
+        context: context,
+        builder: (BuildContext context){
+          //create and return a dialog
+          return AlertDialog(
+            title: const Text("Really??"),
+            content:  const Text("Do you want to close the app ?"),
+            actions: <Widget> [
+              //a no btn
+              TextButton(
+                onPressed: (){
+                  Navigator.of(context).pop(false);
+                },
+                child: const Text("No, Stay"),
+              ),
+              TextButton(
+                onPressed: (){
+                  Navigator.of(context).pop(true);
+                },
+                child: const Text("Yes, Close"),
+              ),
+            ],
+          );
+        }
+    );
+    return exitApp ?? false;
+  }
+
+}
